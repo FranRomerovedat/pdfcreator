@@ -14,22 +14,23 @@ for name in names:
     can.drawString(650, 118, name)
     can.save()
 
-#move to the beginning of the StringIO buffer
-packet.seek(0)
-new_pdf = PdfFileReader(packet)
+    #move to the beginning of the StringIO buffer
+    packet.seek(0)
+    new_pdf = PdfFileReader(packet)
 
-# read your existing PDF
-existing_pdf = PdfFileReader(open('/Users/file.pdf', "rb"))
-output = PdfFileWriter()
+    # read your existing PDF
+    existing_pdf = PdfFileReader(open('Users/file.pdf', "rb"))
+    output = PdfFileWriter()
 
-# add the "watermark" (which is the new pdf) on the existing page
-page = existing_pdf.getPage(0)
-page.mergePage(new_pdf.getPage(0))
-output.addPage(page)
+    # add the "watermark" (which is the new pdf) on the existing page
+    page = existing_pdf.getPage(0)
+    page.mergePage(new_pdf.getPage(0))
+    output.addPage(page)
 
-# finally, write "output" to a real file
-outputStream = open("finalfile.pdf", "wb")
-output.write(outputStream)
-outputStream.close()
+    # finally, write "output" to a real file
+    filename = name+"finalfile.pdf"
+    outputStream = open(filename, "wb")
+    output.write(outputStream)
+    outputStream.close()
 
 
